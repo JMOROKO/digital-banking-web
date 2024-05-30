@@ -1,28 +1,51 @@
 
 <div class="container mt-2">
-  <div class="card" *ngIf="customers">
-    <div class="card-header">
-      Customers liste
-    </div>
-    <div class="card-body">
-      <table class="table table-responsive table-striped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>NOM</th>
-            <th>EMAIL</th>
-            <th>ACTIONS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let customer of customers">
+  <ng-container *ngIf="customers | async as listCustomers; else failureOrLoading">
+    <div class="card">
+      <div class="card-header">
+        Customers liste
+      </div>
+      <div class="card-body">
+        <form [formGroup]="searchFormGroup" (ngSubmit)="handleSearchCustomers()">
+          <div class="input-group">
+            <label class="input-group-text">keyword: </label>
+            <input type="text" formControlName="keyword" class="form-control">
+            <button type="submit" class="btn btn-info"><span class="bi bi-search"></span></button>
+          </div>
+        </form>
+        <table class="table table-responsive table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NOM</th>
+              <th>EMAIL</th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let customer of customers | async">
             <td>{{customer.id}}</td>
             <td>{{customer.nom}}</td>
             <td>{{customer.email}}</td>
+            <td>
+              <button (click)="handleDeleteCustomer(customer)" class="btn btn-outline-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
             <td></td>
           </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #failureOrLoading>
+    <ng-container *ngIf="errorMessage; else loading">
+      <div class="text-danger">{{errorMessage}}</div>
+    </ng-container>
+    <ng-template #loading>
+      Loading...
+    </ng-template>
+  </ng-template>
+
 </div>
