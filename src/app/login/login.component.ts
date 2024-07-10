@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit{
   formLogin!: FormGroup;
+  errorMessage!: String;
   ngOnInit(): void {
     this.formLogin = this.fb.group({
       username: this.fb.control([]),
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit{
         this.router.navigateByUrl("/admin/customers");
       },
       error: err => {
-        console.log(err)
+        this.errorMessage = err.error.errorMessage;
       }
     })
   }

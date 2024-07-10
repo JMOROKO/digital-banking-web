@@ -5,6 +5,9 @@
       Authentication
     </div>
     <div class="card-body">
+      <div class="row" *ngIf="errorMessage">
+        <span class="alert alert-danger mb-3 col">{{errorMessage}}</span>
+      </div>
       <form action="" [formGroup]="formLogin" (submit)="handleSubmit()">
         <div class="mb-3">
           <label class="form-label">Username</label>
