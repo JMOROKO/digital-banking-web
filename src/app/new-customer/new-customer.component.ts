@@ -26,10 +26,9 @@ export class NewCustomerComponent implements OnInit{
     let customer: Customer = this.newCustomerFormGroup.value;
     this.customerService.saveCustomer(customer).subscribe({
       next: customer => {
-        //@TODO Comment faire pour afficher des messages de succès qui viendrons depuis le backend afin de ne pas mettre des message en dure dans le front ?
         alert("customer has been successfully saved !");
         //this.newCustomerFormGroup.reset();
-        this.router.navigateByUrl('customers');
+        this.router.navigateByUrl('/admin/customers');
       },
       error: err => {
         console.log(err);

@@ -3,6 +3,7 @@ import {CustomerService} from "../services/customer.service";
 import {Customer} from "../model/customer.model";
 import {catchError, map, Observable, throwError} from "rxjs";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-customers',
@@ -13,7 +14,7 @@ export class CustomersComponent implements OnInit{
   customers!: Observable<Customer[]>;
   errorMessage!: string;
   searchFormGroup!: FormGroup;
-  constructor(private customerService: CustomerService, private fb: FormBuilder) {
+  constructor(private customerService: CustomerService, private fb: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -51,5 +52,9 @@ export class CustomersComponent implements OnInit{
         console.log(err);
       }
     });
+  }
+
+  editCustomer(customer: Customer) {
+    this.router.navigateByUrl(`/admin/edit-customer/${customer.id}`);
   }
 }

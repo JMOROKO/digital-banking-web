@@ -15,6 +15,9 @@ export class CustomerService {
   getCustomers(): Observable<Customer[]>{
     return this.http.get<Customer[]>(`${environment.backendHost}/customers`);
   }
+  findById(id: number): Observable<Customer>{
+    return this.http.get<Customer>(`${environment.backendHost}/customers/${id}`);
+  }
   searchCustomers(keyword: string): Observable<Customer[]>{
     return this.http.get<Customer[]>(`${environment.backendHost}/customers/search?keyword=${keyword}`);
   }

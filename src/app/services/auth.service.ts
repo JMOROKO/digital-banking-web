@@ -30,6 +30,7 @@ export class AuthService {
     let jwtDecoder:any = jwtDecode(this.accessToken);
     this.username = jwtDecoder.sub;
     this.roles = jwtDecoder.scope;
+    // this.roles = jwtDecoder.scope.split(' ');
     console.log("ROLES :: "+this.roles)
     console.log(this.accessToken)
     window.localStorage.setItem('jwt-token', this.accessToken);
