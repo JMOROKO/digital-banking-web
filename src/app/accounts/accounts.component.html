@@ -16,7 +16,17 @@
               </button>
             </div>
           </form>
-          <ng-container *ngIf="accountObservable | async as accountDetails">
+          <ng-template #errorTemplate>
+            <ng-container *ngIf="errorMessage; else loading">
+              <div class="text-danger">{{errorMessage}}</div>
+            </ng-container>
+          </ng-template>
+          <ng-template #loading>
+            <ng-container>
+              Loading ...
+            </ng-container>
+          </ng-template>
+          <ng-container *ngIf="accountObservable | async as accountDetails; else errorTemplate">
             <div class="mb-2">
               <label>Account ID :</label>
               <label><b>{{accountDetails.accountId}}</b></label>
@@ -80,7 +90,7 @@
               <input type="text" formControlName="description" class="form-control" id="description">
             </div>
             <div class="d-grid mb-3">
-              <button class="btn btn-success" type="submit">Save operation</button>
+              <button class="btn btn-success">Save operation</button>
             </div>
 
           </form>

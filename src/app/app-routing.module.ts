@@ -9,6 +9,7 @@ import {AuthenticationGuard} from "./guards/authentication.guard";
 import {AuthorizationGuard} from "./guards/authorization.guard";
 import {NotAuthoriredComponent} from "./not-authorired/not-authorired.component";
 import {EditCustomerComponent} from "./edit-customer/edit-customer.component";
+import {CustomerAccountComponent} from "./customer-account/customer-account.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
     children:[
       {path: 'customers', component: CustomersComponent},
       {path: 'accounts', component: AccountsComponent},
+      {path: 'customer-accounts/:id', component: CustomerAccountComponent},
       {path: 'new-customer', component: NewCustomerComponent, canActivate: [AuthorizationGuard], data: {role: "ADMIN"}},
       {path: 'edit-customer/:id-customer', component: EditCustomerComponent, canActivate: [AuthorizationGuard], data: {role: "ADMIN"}},
       {path: 'notAuthorized', component: NotAuthoriredComponent},
