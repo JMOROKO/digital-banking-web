@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {catchError, map, Observable} from "rxjs";
 import {Customer} from "../model/customer.model";
 import {environment} from "../../environments/environment";
 
@@ -10,21 +10,24 @@ import {environment} from "../../environments/environment";
 export class CustomerService {
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getCustomers(): Observable<Customer[]>{
+
+
+  getCustomers(): Observable<any>{
     return this.http.get<Customer[]>(`${environment.backendHost}/customers`);
   }
-  findById(id: number): Observable<Customer>{
+  findById(id: number): Observable<any>{
     return this.http.get<Customer>(`${environment.backendHost}/customers/${id}`);
   }
-  searchCustomers(keyword: string): Observable<Customer[]>{
+  searchCustomers(keyword: string): Observable<any>{
     return this.http.get<Customer[]>(`${environment.backendHost}/customers/search?keyword=${keyword}`);
   }
-  saveCustomer(customer: Customer): Observable<Customer>{
+  saveCustomer(customer: Customer): Observable<any>{
     return this.http.post<Customer>(`${environment.backendHost}/customers`, customer);
   }
-  deleteCustomer(id: number): Observable<void>{
+  deleteCustomer(id: number): Observable<any>{
     return this.http.delete<void>(`${environment.backendHost}/customers/${id}`);
   }
 }

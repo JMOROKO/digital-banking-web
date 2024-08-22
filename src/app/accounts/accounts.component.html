@@ -1,6 +1,11 @@
 <div class="container mt-2">
+  <div class="row" *ngIf="errorMessage">
+    <div class="col alert alert-danger" role="alert">
+      {{errorMessage}}
+    </div>
+  </div>
   <div class="row">
-    <div class="col col-md-6">
+    <div class="col-md-6">
       <div class="card">
         <div class="card-header">
           Accounts

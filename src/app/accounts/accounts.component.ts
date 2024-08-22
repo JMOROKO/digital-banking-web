@@ -37,6 +37,7 @@ export class AccountsComponent implements OnInit{
     let accountId: string = this.accountFormGroup.value.accountId;
     this.accountObservable = this.accountService.getAccount(accountId, this.currentPage, this.pageSize).pipe(
       catchError(err => {
+        this.errorMessage = err.error.errorMessage;
         this.errorMessage = err;
         return throwError(err);
       })
@@ -62,7 +63,7 @@ export class AccountsComponent implements OnInit{
           alert("L'opération de débit c'est terminé avec succès.");
         },
         error: err => {
-          console.log(err);
+          this.errorMessage = err.error.errorMessage;
         }
       });
     }
@@ -74,7 +75,7 @@ export class AccountsComponent implements OnInit{
           alert("L'opération de crédit c'est terminé avec succès.");
         },
         error: err => {
-          console.log(err);
+          this.errorMessage = err.error.errorMessage;
         }
       });
     }
@@ -86,7 +87,8 @@ export class AccountsComponent implements OnInit{
           alert("L'opération de transfert c'est terminé avec succès.");
         },
         error: err => {
-          console.log(err);
+          //console.log("Log erreur account : "+err.error.errorMessage)
+          this.errorMessage = err.error.errorMessage;
         }
       });
     }
