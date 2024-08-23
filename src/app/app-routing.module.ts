@@ -10,12 +10,16 @@ import {AuthorizationGuard} from "./guards/authorization.guard";
 import {NotAuthoriredComponent} from "./not-authorired/not-authorired.component";
 import {EditCustomerComponent} from "./edit-customer/edit-customer.component";
 import {CustomerAccountComponent} from "./customer-account/customer-account.component";
+import {UtilisateurComponent} from "./utilisateur/utilisateur.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', redirectTo: "/login", pathMatch: 'full'},
   {path: 'admin', component: AdminTemplateComponent, canActivate: [AuthenticationGuard],
     children:[
+      {path: 'users', component: UtilisateurComponent, canActivate: [AuthorizationGuard], data: {role: "ADMIN"}},
+      {path: 'new-user', component: UtilisateurComponent, canActivate: [AuthorizationGuard], data: {role: "ADMIN"}},
+      {path: 'edit-user/:id-user', component: UtilisateurComponent, canActivate: [AuthorizationGuard], data: {role: "ADMIN"}},
       {path: 'customers', component: CustomersComponent},
       {path: 'accounts', component: AccountsComponent},
       {path: 'customer-accounts/:id', component: CustomerAccountComponent},

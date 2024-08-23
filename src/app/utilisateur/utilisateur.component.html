@@ -1,0 +1,67 @@
+
+
+<div class="container">
+  <div class="row" *ngIf="errorMessage">
+    <span class="alert alert-danger mb-3 col-md-6 offset-3">{{errorMessage}}</span>
+  </div>
+  <div class="card col-md-6 offset-3 mt-2" >
+    <div class="card-header">New user</div>
+    <div class="card-body">
+      <form [formGroup]="utilisateurFormGroup" (ngSubmit)="handleSaveUser()">
+        <div class="mb-3">
+          <div class="form-label">user name:</div>
+          <input formControlName="username" type="text" class="form-control">
+          <span class="text-danger"
+                *ngIf="utilisateurFormGroup.controls['username'].touched
+                && utilisateurFormGroup.controls['username'].errors
+                && utilisateurFormGroup.controls['username'].errors!['required']"
+          >username is required</span>
+        </div>
+        <div class="mb-3">
+          <div class="form-label">password:</div>
+          <input formControlName="password" type="password" class="form-control">
+          <span class="text-danger"
+                *ngIf="utilisateurFormGroup.controls['password'].touched
+                && utilisateurFormGroup.controls['password'].errors
+                && utilisateurFormGroup.controls['password'].errors!['required']"
+          >password is not valid</span>
+        </div>
+        <div class="mb-3">
+          <div class="form-label">confirm Password:</div>
+          <input formControlName="confirmPassword" type="password" class="form-control">
+          <span class="text-danger"
+                *ngIf="utilisateurFormGroup.controls['confirmPassword'].touched
+                && utilisateurFormGroup.controls['confirmPassword'].errors
+                && utilisateurFormGroup.controls['confirmPassword'].errors!['required']"
+          >password is not valid</span>
+        </div>
+        <div class="mb-3">
+          <div class="form-label">email:</div>
+          <input formControlName="email" type="email" class="form-control">
+          <span class="text-danger"
+                *ngIf="utilisateurFormGroup.controls['email'].touched
+                && utilisateurFormGroup.controls['email'].errors
+                && utilisateurFormGroup.controls['email'].errors!['required']"
+          >email is not valid</span>
+        </div>
+        <div class="mb-3">
+          <div class="form-label">phone:</div>
+          <input formControlName="fileName" (change)="onSelectedFile($event)" type="file" class="form-control">
+        </div>
+        <div class="mb-3">
+          <div class="form-label">Rôle:</div>
+          <select formControlName="role" id="role" class="form-select">
+            <option *ngFor="let role of roles" value="{{role.role}}">{{role.role}}</option>
+          </select>
+          <span class="text-danger"
+                *ngIf="utilisateurFormGroup.controls['role'].touched
+                && utilisateurFormGroup.controls['role'].errors
+                && utilisateurFormGroup.controls['role'].errors!['required']"
+          >role is not valid</span>
+        </div>
+
+        <button [disabled]="!utilisateurFormGroup.valid" class="btn btn-success">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

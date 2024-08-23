@@ -21,6 +21,15 @@
             <li *ngIf="authService.roles.includes('ROLE_ADMIN')"><a class="dropdown-item" routerLink="/admin/new-customer">Add customer</a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Utilisateurs
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/admin/users">Search user</a></li>
+            <li *ngIf="authService.roles.includes('ROLE_ADMIN')"><a class="dropdown-item" routerLink="/admin/new-user">Add user</a></li>
+          </ul>
+        </li>
       </ul>
       <ul class="navbar" *ngIf="authService.isAuthenticated == true">
         <li class="nav-link active">
